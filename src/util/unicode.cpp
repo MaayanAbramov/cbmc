@@ -8,6 +8,7 @@ Author: Daniel Kroening, kroening@kroening.com
 
 #include "unicode.h"
 
+#include <cstdint>
 #include <codecvt>
 #include <iomanip>
 #include <locale>

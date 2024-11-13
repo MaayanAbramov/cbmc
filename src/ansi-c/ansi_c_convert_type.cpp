@@ -257,7 +257,7 @@ void ansi_c_convert_typet::read_rec(const typet &type)
   {
     const exprt &as_expr =
       static_cast<const exprt &>(static_cast<const irept &>(type));
-    requires.push_back(to_unary_expr(as_expr).op());
+    m_requires.push_back(to_unary_expr(as_expr).op());
   }
   else if(type.id() == ID_C_spec_assigns)
   {
@@ -319,8 +319,8 @@ void ansi_c_convert_typet::write(typet &type)
     type.swap(other.front());
 
     // the contract expressions are meant for function types only
-    if(!requires.empty())
-      to_code_with_contract_type(type).requires() = std::move(requires);
+    if(!m_requires.empty())
+      to_code_with_contract_type(type).spec_requires() = std::move(m_requires);
 
     if(!assigns.empty())
       to_code_with_contract_type(type).assigns() = std::move(assigns);

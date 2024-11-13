@@ -376,12 +376,12 @@ public:
     return static_cast<exprt &>(add(ID_C_spec_assigns)).operands();
   }
 
-  const exprt::operandst &requires() const
+  const exprt::operandst &spec_requires() const
   {
     return static_cast<const exprt &>(find(ID_C_spec_requires)).operands();
   }
 
-  exprt::operandst &requires()
+  exprt::operandst &spec_requires()
   {
     return static_cast<exprt &>(add(ID_C_spec_requires)).operands();
   }

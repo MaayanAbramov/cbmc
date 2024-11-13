@@ -734,16 +734,16 @@ void c_typecheck_baset::typecheck_declaration(
         // available
         auto &code_type = to_code_with_contract_type(new_symbol.type);
 
-        for(auto &requires : code_type.requires())
+        for(auto &spec_requires : code_type.spec_requires())
         {
-          typecheck_expr(requires);
-          implicit_typecast_bool(requires);
+          typecheck_expr(spec_requires);
+          implicit_typecast_bool(spec_requires);
           disallow_subexpr_by_id(
-            requires,
+            spec_requires,
             ID_old,
             CPROVER_PREFIX "old is not allowed in preconditions.");
           disallow_subexpr_by_id(
-            requires,
+            spec_requires,
             ID_loop_entry,
             CPROVER_PREFIX "loop_entry is not allowed in preconditions.");
         }

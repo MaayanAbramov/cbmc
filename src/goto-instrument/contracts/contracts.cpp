@@ -748,7 +748,7 @@ void code_contractst::apply_function_contract(
 
   // Isolate each component of the contract.
   auto assigns_clause = type.assigns();
-  auto requires = conjunction(type.requires());
+  auto code_requires = conjunction(type.spec_requires());
   auto ensures = conjunction(type.ensures());
 
   // Create a replace_symbolt object, for replacing expressions in the callee
@@ -823,19 +823,19 @@ void code_contractst::apply_function_contract(
   is_fresh.create_declarations();
 
   // Insert assertion of the precondition immediately before the call site.
-  if(!requires.is_true())
+  if(!code_requires.is_true())
   {
     replace_symbolt replace(common_replace);
-    code_contractst::add_quantified_variable(requires, replace, mode);
-    replace(requires);
+    code_contractst::add_quantified_variable(code_requires, replace, mode);
+    replace(code_requires);
 
     goto_programt assertion;
     converter.goto_convert(
-      code_assertt(requires),
+      code_assertt(code_requires),
       assertion,
       symbol_table.lookup_ref(target_function).mode);
     assertion.instructions.back().source_location_nonconst() =
-      requires.source_location();
+      code_requires.source_location();
     assertion.instructions.back().source_location_nonconst().set_comment(
       "Check requires clause");
     assertion.instructions.back().source_location_nonconst().set_property_class(
@@ -1380,7 +1380,7 @@ void code_contractst::add_contract_check(
   const auto &code_type = to_code_with_contract_type(function_symbol.type);
 
   auto assigns = code_type.assigns();
-  auto requires = conjunction(code_type.requires());
+  auto code_requires = conjunction(code_type.spec_requires());
   auto ensures = conjunction(code_type.ensures());
 
   // build:
@@ -1388,7 +1388,7 @@ void code_contractst::add_contract_check(
   //   decl ret
   //   decl parameter1 ...
   //   decl history_parameter1 ... [optional]
-  //   assume(requires)  [optional]
+  //   assume(code_requires)  [optional]
   //   ret=function(parameter1, ...)
   //   assert(ensures)
   // skip: ...
@@ -1455,19 +1455,19 @@ void code_contractst::add_contract_check(
   is_fresh_enforcet visitor(*this, log, wrapper_function);
   visitor.create_declarations();
 
-  // Generate: assume(requires)
-  if(!requires.is_false())
+  // Generate: assume(code_requires)
+  if(!code_requires.is_false())
   {
     // extend common_replace with quantified variables in REQUIRES,
     // and then do the replacement
     replace_symbolt replace(common_replace);
     code_contractst::add_quantified_variable(
-      requires, replace, function_symbol.mode);
-    replace(requires);
+      code_requires, replace, function_symbol.mode);
+    replace(code_requires);
 
     goto_programt assumption;
     converter.goto_convert(
-      code_assumet(requires), assumption, function_symbol.mode);
+      code_assumet(code_requires), assumption, function_symbol.mode);
     visitor.update_requires(assumption);
     check.destructive_append(assumption);
   }

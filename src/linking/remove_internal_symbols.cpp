@@ -64,12 +64,12 @@ static void get_symbols(
       // check for contract definitions
       const exprt ensures =
         static_cast<const exprt &>(code_type.find(ID_C_spec_ensures));
-      const exprt requires =
+      const exprt spec_requires =
         static_cast<const exprt &>(code_type.find(ID_C_spec_requires));
 
       find_symbols_sett new_symbols;
       find_type_and_expr_symbols(ensures, new_symbols);
-      find_type_and_expr_symbols(requires, new_symbols);
+      find_type_and_expr_symbols(spec_requires, new_symbols);
 
       for(const auto &s : new_symbols)
       {

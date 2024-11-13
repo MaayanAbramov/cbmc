@@ -37,6 +37,7 @@ Author: Michael Tautschnig, mt@eecs.qmul.ac.uk
 
 #include <climits>
 #include <cstddef> // std::size_t
+#include <cstdint>
 
 #ifdef _MSC_VER
 

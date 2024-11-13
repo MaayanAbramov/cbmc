@@ -12,6 +12,7 @@ Author: Kareem Khazem <karkhaz@karkhaz.com>, 2019
 
 #include <iomanip>
 #include <sstream>
+#include <cstdint>
 
 irep_idt file_name_manglert::
 operator()(const symbolt &src, const std::string &extra_info)

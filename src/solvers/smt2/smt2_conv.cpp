@@ -42,6 +42,8 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <solvers/lowering/expr_lowering.h>
 #include <solvers/prop/literal_expr.h>
 
+#include <cstdint>
+
 // Mark different kinds of error conditions
 
 // Unexpected types and other combinations not implemented and not

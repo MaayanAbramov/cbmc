@@ -17,6 +17,7 @@ Author:
 #include <fstream>
 #include <map>
 #include <string>
+#include <cstdint>
 
 // we follow
 // https://developer.apple.com/library/mac/#documentation/DeveloperTools/Conceptual/MachORuntime/Reference/reference.html
