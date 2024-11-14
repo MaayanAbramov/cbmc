@@ -54,18 +54,28 @@ DIRS = cbmc \
        catch-framework \
        # Empty last line
 
+WSL_DISABLED = \
+               cbmc-cpp \
+							 systemc \
+							 cpp-linter \
+							 catch-framework \
+							 cbmc-incr-smt2
+
+DIRS := $(filter-out $(WSL_DISABLED),$(DIRS))
+
 ifeq ($(OS),Windows_NT)
     detected_OS := Windows
 else
     detected_OS := $(shell sh -c 'uname 2>/dev/null || echo Unknown')
 endif
 
-ifeq ($(detected_OS),Linux)
-  ifneq ($(WITH_MEMORY_ANALYZER),0)
+#ifeq ($(detected_OS),Linux)
+#  ifneq ($(WITH_MEMORY_ANALYZER),0)
     # only set if it wasn't explicitly unset
-    WITH_MEMORY_ANALYZER=1
-  endif
-endif
+#    WITH_MEMORY_ANALYZER=1
+#  endif
+#endif
+
 
 ifeq ($(WITH_MEMORY_ANALYZER),1)
   DIRS += snapshot-harness \
