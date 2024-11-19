@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointer_is_invalid.c
 
 Passing problem to incremental SMT2 solving

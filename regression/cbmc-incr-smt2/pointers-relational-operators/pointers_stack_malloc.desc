@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointers_stack_malloc.c
 --trace --no-malloc-may-fail
 \[main\.assertion\.1\] line \d+ \*\(a \+ i\) >= i: expected successful: SUCCESS

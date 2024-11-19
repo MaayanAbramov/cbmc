@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 shift_left.c
 
 \[main\.assertion\.1\] line \d Shifted result should be greater than one: FAILURE

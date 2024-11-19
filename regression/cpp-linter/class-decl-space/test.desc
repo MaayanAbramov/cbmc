@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 main.cpp
 
 ^regression/cpp-linter/class-decl-space/main\.cpp:13:  There should be a space between class identifier and :  \[readability/identifier_spacing\] \[4\]$

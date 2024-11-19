@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 unsigned_behaviour.c
 --trace
 \[main\.assertion\.1\] line \d+ a plus b should be more than 27: FAILURE

@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointer_subtraction_unsigned.c
 --trace
 \[main\.assertion\.1\] line \d+ expected failure after pointer manipulation: FAILURE

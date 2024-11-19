@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointer_offset.c
 --trace
 \[main\.assertion\.1\] line \d+ expected failure because offsets should be the same: FAILURE

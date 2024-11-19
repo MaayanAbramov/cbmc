@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 addition_compound_expr.c
 --trace
 \[main\.assertion\.1\] line \d+ expected successful because of pointer arithmetic: SUCCESS

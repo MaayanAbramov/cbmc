@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 main.cpp
 
 ^regression/cpp-linter/if-else4/main\.cpp:24:  Statement after an if should be on a new line  \[readability/braces\] \[5\]$

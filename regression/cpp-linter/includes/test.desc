@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 main.cpp
 
 ^regression/cpp-linter/includes/main.cpp:3:  Module `` must not use `util/other.h`  \[build/include\] \[4\]

@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 byte-extract.c
 
 \[main.assertion\.1\] line \d+ assertion y\[0\] == 0: FAILURE

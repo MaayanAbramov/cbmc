@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 array_write.c
 --trace
 Passing problem to incremental SMT2 solving

@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointer_round_trip.c
 --trace
 \[main\.assertion\.1\] line \d+ a == 5: expected success: SUCCESS

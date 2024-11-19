@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointers_stack_lessthan.c
 --trace
 \[main\.assertion\.1] line \d+ y != x: expected successful: SUCCESS

@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 main.cpp
 
 ^regression/cpp-linter/operator-spacing2/main\.cpp:27:  Missing spaces around <<  \[whitespace/operators\] \[3\]

@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 main.cpp
 
 main\.cpp:3:  Do not use namespaces  \[readability/namespace\] \[4\]

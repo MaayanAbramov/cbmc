@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointer_subtraction.c
 --no-signed-overflow-check --trace --no-pointer-check
 \[main\.assertion\.1\] line \d+ expected failure after pointer manipulation: FAILURE

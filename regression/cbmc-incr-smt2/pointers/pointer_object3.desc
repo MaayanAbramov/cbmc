@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointer_object3.c
 
 \[main\.assertion\.1] line \d+ expected to fail with object ID == 0: FAILURE

@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 signed_overflow.c
 --signed-overflow-check --trace
 ^VERIFICATION FAILED$

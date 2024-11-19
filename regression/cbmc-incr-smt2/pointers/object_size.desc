@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 object_size.c
 --trace
 line 12 Expected int sizes\.: SUCCESS

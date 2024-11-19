@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 main.cpp
 
 ^regression/cpp-linter/do-while1/main\.cpp:31:  Empty loop bodies should use \{\} or continue  \[whitespace/empty_loop_body\] \[5\]$

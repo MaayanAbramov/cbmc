@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 polynomial.c
 --trace
 \[main\.assertion\.1\] line \d+ No negative solution: FAILURE

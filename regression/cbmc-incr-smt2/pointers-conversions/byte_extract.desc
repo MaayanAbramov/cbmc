@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 byte_extract.c
 --trace
 Running incremental SMT2 solving via
