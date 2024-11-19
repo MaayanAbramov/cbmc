@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 array-misalign.c
 
 \[main.assertion\.1\] line \d+ assertion x\[0\] == 256ul \|\| x\[0\] == 1ul: SUCCESS

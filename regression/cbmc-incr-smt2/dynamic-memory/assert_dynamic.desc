@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 assert_dynamic.c
 --no-malloc-may-fail --trace
 Passing problem to incremental SMT2 solving

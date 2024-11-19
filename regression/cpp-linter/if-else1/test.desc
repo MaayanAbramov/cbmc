@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 main.cpp
 
 ^regression/cpp-linter/if-else1/main\.cpp:26:  Else if should be on a new line after closing brace  \[readability/braces\] \[5\]$

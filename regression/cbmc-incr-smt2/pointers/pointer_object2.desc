@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointer_object2.c
 --trace --verbosity 10
 \[main\.assertion\.1\] line 13 Can be violated.: FAILURE

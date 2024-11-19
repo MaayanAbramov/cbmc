@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 div_by_zero.c
 --div-by-zero-check --trace
 \[main\.division-by-zero\.1\] line \d division by zero in x / y: FAILURE

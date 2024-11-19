@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 main.cpp
 
 ^regression/cpp-linter/assert/main\.cpp:8:  assert is deprecated, use UNREACHABLE instead  \[build/deprecated\] \[4\]

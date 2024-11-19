@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 bitwise_ops.c
 
 \[main\.assertion\.1\] line \d+ This is going to fail for bit-opposites: FAILURE

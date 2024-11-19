@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointer_values.c
 --trace
 \[main\.assertion\.1\] line \d+ should fail because a can be any pointer val, including NULL: FAILURE

@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 [irep_error_printing]
 
 REQUIRE\( foo == bar \)

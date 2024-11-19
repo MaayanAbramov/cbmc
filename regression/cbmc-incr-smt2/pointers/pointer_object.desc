@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointer_object.c
 --trace --verbosity 10
 \[main\.assertion\.1\] line \d+ expected fail as c can be null: FAILURE

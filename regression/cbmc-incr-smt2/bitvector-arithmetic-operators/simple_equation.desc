@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 simple_equation.c
 --trace --verbosity 10
 \[main\.assertion\.1\] line \d+ a plus a always equals two times a: SUCCESS

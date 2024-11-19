@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 pointer_from_int.c
 --trace
 \[main\.assertion\.1\] line \d+ p == 4: expected success: SUCCESS

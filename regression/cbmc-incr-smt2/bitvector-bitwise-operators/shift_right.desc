@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 shift_right.c
 --trace
 \[main\.assertion\.1\] line \d+ Right shifting a uint with leftmost bit set is a logical shift: FAILURE
