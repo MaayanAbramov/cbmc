@@ -128,7 +128,9 @@ void cbmc_parse_optionst::get_command_line_options(optionst &options)
 
   cbmc_parse_optionst::set_default_options(options);
   parse_c_object_factory_options(cmdline, options);
-
+  if(cmdline.isset("choose-first-candidate")){
+    options.set_option("choose-first-candidate", true);
+  }
   if(cmdline.isset("function"))
     options.set_option("function", cmdline.get_value("function"));
 
@@ -589,7 +591,7 @@ int cbmc_parse_optionst::doit()
   }
 
   std::unique_ptr<goto_verifiert> verifier = nullptr;
-
+ 
   if(options.is_set("incremental-loop"))
   {
     if(options.get_bool_option("stop-on-fail"))
@@ -721,7 +723,7 @@ int cbmc_parse_optionst::get_goto_program(
       goto_model, ui_message_handler, cmdline.isset("list-goto-functions"));
     return CPROVER_EXIT_SUCCESS;
   }
-
+  
   log.status() << config.object_bits_info() << messaget::eom;
 
   return -1; // no error, continue

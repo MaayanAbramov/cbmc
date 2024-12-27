@@ -59,6 +59,7 @@ class optionst;
   "(verbosity):(no-library)" \
   "(nondet-static)" \
   "(version)" \
+  "(choose-first-candidate)"\
   OPT_COVER \
   "(symex-coverage-report):" \
   "(mm):" \
