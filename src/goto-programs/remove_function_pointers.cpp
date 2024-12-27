@@ -555,10 +555,6 @@ void remove_function_pointer_mine(
 
     tmp_previous_if = new_code.insert_before(previous_call,
       goto_programt::make_goto(tmp_previous_if, notequal_exprt(pointer, casted_address)));
-    
-       if(choose_first_candidate){
-           break;
-       }
   } 
 
   // fall-through
