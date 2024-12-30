@@ -344,16 +344,6 @@ void remove_function_pointerst::remove_function_pointer(
     add_safety_assertion,
     only_first_candidate_considered_fps);
   }
-  //       ::remove_function_pointer(
-  //   message_handler,
-  //   symbol_table,
-  //   goto_program,
-  //   function_id,
-  //   target,
-  //   functions,
-  //   add_safety_assertion,
-  //   only_first_candidate_considered_fps);
-  // }
   else{
       ::remove_function_pointer(
     message_handler,
@@ -450,10 +440,6 @@ void remove_function_pointer(
     new_code_gotos.add(
       goto_programt::make_goto(call, equal_exprt(pointer, casted_address)));
     
-    // if(only_first_candidate_considered_fps){
-    //   break;
-    // }
-    break;
   }
 
   // fall-through

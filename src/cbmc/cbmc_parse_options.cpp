@@ -424,7 +424,6 @@ int cbmc_parse_optionst::doit()
                 << messaget::eom;
     return CPROVER_EXIT_USAGE_ERROR;
   }
- 
   if(cmdline.isset("show-points-to-sets"))
   {
     if(!cmdline.isset("json-ui") || cmdline.isset("xml-ui"))
@@ -713,7 +712,7 @@ int cbmc_parse_optionst::get_goto_program(
     show_loop_ids(ui_message_handler.get_ui(), goto_model);
     return CPROVER_EXIT_SUCCESS;
   }
-
+  // show it?
   if(
     cmdline.isset("show-goto-functions") ||
     cmdline.isset("list-goto-functions"))
