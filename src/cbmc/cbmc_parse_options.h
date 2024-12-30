@@ -57,6 +57,7 @@ class optionst;
   "(havoc-undefined-functions)" \
   "(property):(stop-on-fail)(trace)" \
   "(verbosity):(no-library)" \
+  "(only_first_candidate_considered_fps)"\
   "(nondet-static)" \
   "(version)" \
   OPT_COVER \
@@ -71,6 +72,7 @@ class optionst;
   OPT_ANSI_C_LANGUAGE \
   "(claim):(show-claims)(floatbv)(all-claims)(all-properties)" // legacy, and will eventually disappear // NOLINT(whitespace/line_length)
 // clang-format on
+
 
 class cbmc_parse_optionst : public parse_options_baset
 {

@@ -128,7 +128,9 @@ void cbmc_parse_optionst::get_command_line_options(optionst &options)
 
   cbmc_parse_optionst::set_default_options(options);
   parse_c_object_factory_options(cmdline, options);
-
+  if(cmdline.isset("only_first_candidate_considered_fps")){
+    options.set_option("only_first_candidate_considered_fps",true);
+  }
   if(cmdline.isset("function"))
     options.set_option("function", cmdline.get_value("function"));
 
@@ -422,7 +424,7 @@ int cbmc_parse_optionst::doit()
                 << messaget::eom;
     return CPROVER_EXIT_USAGE_ERROR;
   }
-
+ 
   if(cmdline.isset("show-points-to-sets"))
   {
     if(!cmdline.isset("json-ui") || cmdline.isset("xml-ui"))
@@ -711,7 +713,9 @@ int cbmc_parse_optionst::get_goto_program(
     show_loop_ids(ui_message_handler.get_ui(), goto_model);
     return CPROVER_EXIT_SUCCESS;
   }
-
+  // if(options.isset("only_first_candidate_considered_fps")){
+  //   options.set_option("only_first_candidate_considered_fps",true);
+  // }
   // show it?
   if(
     cmdline.isset("show-goto-functions") ||

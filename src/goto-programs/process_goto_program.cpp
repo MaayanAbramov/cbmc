@@ -40,10 +40,31 @@ bool process_goto_program(
   // remove function pointers
   log.status() << "Removal of function pointers and virtual functions"
                << messaget::eom;
+  // remove_function_pointers(
+  // log.get_message_handler(),
+  // goto_model,
+  // options.get_bool_option("pointer-check"));
   remove_function_pointers(
-    log.get_message_handler(),
-    goto_model,
-    options.get_bool_option("pointer-check"));
+  log.get_message_handler(),
+  goto_model,
+  options.get_bool_option("pointer-check"),false,
+  options.get_bool_option("only_first_candidate_considered_fps"));
+// if(options.get_bool_option("only_first_candidate_considered_fps"))
+// {
+//   // Call the new function that only considers the first candidate
+//   remove_function_pointer_only_first_candidate_considered(
+//     log.get_message_handler(),
+//     goto_model,
+//     options.get_bool_option("pointer-check"));
+// }
+// else
+// {
+//   // Call the original function
+//   remove_function_pointers(
+//     log.get_message_handler(),
+//     goto_model,
+//     options.get_bool_option("pointer-check"));
+// }
 
   mm_io(goto_model);
 
