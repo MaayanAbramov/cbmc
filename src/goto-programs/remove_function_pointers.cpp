@@ -568,7 +568,6 @@ for (const auto &fun : functions) {
 
     // If we already have a previous GOTO, update its target to the current GOTO
     if (previous_goto != combined_new_code_calls_and_new_code_gotos.instructions.end()) {
-        //update the target of the previous GOTO
         previous_goto->set_target(current_goto);
     }
 
@@ -585,13 +584,6 @@ for (const auto &fun : functions) {
       function_pointer_assertion_comment(functions));
   }
   combined_new_code_calls_and_new_code_gotos.add(goto_programt::make_assumption(false_exprt()));
-
-
-
-  // patch them all together
-  // new_code.destructive_append(new_code_gotos);
-  // new_code.destructive_append(new_code_calls);
-  // new_code.destructive_append(final_skip);
 
   // set locations
   for(auto &instruction : combined_new_code_calls_and_new_code_gotos.instructions)

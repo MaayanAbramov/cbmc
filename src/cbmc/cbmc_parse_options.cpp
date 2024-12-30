@@ -713,10 +713,7 @@ int cbmc_parse_optionst::get_goto_program(
     show_loop_ids(ui_message_handler.get_ui(), goto_model);
     return CPROVER_EXIT_SUCCESS;
   }
-  // if(options.isset("only_first_candidate_considered_fps")){
-  //   options.set_option("only_first_candidate_considered_fps",true);
-  // }
-  // show it?
+
   if(
     cmdline.isset("show-goto-functions") ||
     cmdline.isset("list-goto-functions"))
