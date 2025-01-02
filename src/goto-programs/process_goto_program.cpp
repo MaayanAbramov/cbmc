@@ -6,7 +6,7 @@ Author: Martin Brain, martin.brain@cs.ox.ac.uk
 
 \*******************************************************************/
 
-/// \file
+/// \fileexp
 /// Get a Goto Program
 
 #include "process_goto_program.h"
@@ -43,7 +43,7 @@ bool process_goto_program(
   remove_function_pointers(
     log.get_message_handler(),
     goto_model,
-    options.get_bool_option("pointer-check"),false,
+    options.get_bool_option("pointer-check"),false, //the fourth argument "false" added here as a parameter only_remove_const_fps = false. reason: I needed to initialize the fifth parameter
     options.get_bool_option("choose-first-candidate")); //here we put the argument flag
 
   mm_io(goto_model);

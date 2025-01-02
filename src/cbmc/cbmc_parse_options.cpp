@@ -591,7 +591,7 @@ int cbmc_parse_optionst::doit()
   }
 
   std::unique_ptr<goto_verifiert> verifier = nullptr;
- 
+
   if(options.is_set("incremental-loop"))
   {
     if(options.get_bool_option("stop-on-fail"))
@@ -723,7 +723,7 @@ int cbmc_parse_optionst::get_goto_program(
       goto_model, ui_message_handler, cmdline.isset("list-goto-functions"));
     return CPROVER_EXIT_SUCCESS;
   }
-  
+
   log.status() << config.object_bits_info() << messaget::eom;
 
   return -1; // no error, continue

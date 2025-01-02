@@ -29,7 +29,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include "remove_const_function_pointers.h"
 #include "remove_skip.h"
 
-  class remove_function_pointerst
+class remove_function_pointerst
 {
 public:
   remove_function_pointerst(
@@ -83,7 +83,7 @@ remove_function_pointerst::remove_function_pointerst(
   bool _add_safety_assertion,
   bool only_resolve_const_fps,
   const goto_functionst &goto_functions,
-    bool choose_first_candidate)
+  bool choose_first_candidate)
   : message_handler(_message_handler),
     ns(_symbol_table),
     symbol_table(_symbol_table),
@@ -343,9 +343,11 @@ void remove_function_pointerst::remove_function_pointer(
     function_id,
     target,
     functions,
-    add_safety_assertion, choose_first_candidate);
+    add_safety_assertion, 
+    choose_first_candidate);
   }
-  else{
+  else
+  {
     ::remove_function_pointer(
     message_handler,
     symbol_table,
@@ -506,6 +508,7 @@ void remove_function_pointer(
       mstream << messaget::eom;
     });
 }
+
 void remove_function_pointer_mine(
   message_handlert &message_handler,
   symbol_tablet &symbol_table,
@@ -528,7 +531,7 @@ void remove_function_pointer_mine(
   // goto_programt new_code_calls;
   // goto_programt new_code_gotos;
  
-  auto tmp_previous_if = t_final;
+  auto previous_if = t_final;
   for(const auto &fun : functions)
   {
     // call function
@@ -538,11 +541,11 @@ void remove_function_pointer_mine(
     // the signature of the function might not match precisely
     fix_argument_types(new_call);
 
-    goto_programt tmp;
-    fix_return_type(function_id, new_call, symbol_table, tmp);
+     goto_programt tmp;
+     fix_return_type(function_id, new_call, symbol_table, tmp);
 
-    auto previous_call = new_code.insert_before(tmp_previous_if, goto_programt::make_function_call(new_call));
-    new_code.destructive_append(tmp);
+    auto previous_call = new_code.insert_before(previous_if, goto_programt::make_function_call(new_call));
+    new_code.destructive_insert(previous_if, tmp);
 
     // goto final
     //new_code.add(goto_programt::make_goto(t_final, true_exprt()));
@@ -553,8 +556,8 @@ void remove_function_pointer_mine(
     const auto casted_address =
       typecast_exprt::conditional_cast(address_of, pointer.type());
 
-    tmp_previous_if = new_code.insert_before(previous_call,
-      goto_programt::make_goto(tmp_previous_if, notequal_exprt(pointer, casted_address)));
+    previous_if = new_code.insert_before(previous_call,
+      goto_programt::make_goto(previous_if, notequal_exprt(pointer, casted_address)));
   } 
 
   // fall-through
