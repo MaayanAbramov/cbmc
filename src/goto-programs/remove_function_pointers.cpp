@@ -413,7 +413,7 @@ void remove_function_pointer(
   goto_programt new_code_gotos;
 
   for(const auto &fun : functions)
-  {
+  { 
     // call function
     auto new_call =
       code_function_callt(target->call_lhs(), fun, target->call_arguments());
