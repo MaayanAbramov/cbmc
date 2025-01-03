@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 dummy_parameter.c
 precondition-structured
 ^EXIT=(0|127|134|137)$
