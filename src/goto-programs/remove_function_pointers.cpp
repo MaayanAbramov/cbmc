@@ -524,8 +524,11 @@ void remove_function_pointer_mine(
 
   goto_programt new_code;
   goto_programt::targett t_final = new_code.add(goto_programt::make_skip());
+  
   // build the calls and gotos
-
+  
+  // Create the assignment `done = 1`
+  symbol_exprt done_expr("done", typet(bool_typet())); 
   auto previous_if = t_final;
   for(const auto &fun : functions)
   {
@@ -542,8 +545,7 @@ void remove_function_pointer_mine(
     auto previous_call = new_code.insert_before(previous_if, goto_programt::make_function_call(new_call));
     new_code.destructive_insert(previous_if, tmp);
     
-    // Create the assignment `done = 1`
-    symbol_exprt done_expr("done", typet(bool_typet())); 
+    // Create the assignment tbe one for `done = 1`
     constant_exprt one_expr(irep_idt("1"),signed_int_type());
 
     new_code.insert_before(previous_if, goto_programt::make_assignment(code_assignt(done_expr, one_expr)));
@@ -562,19 +564,12 @@ void remove_function_pointer_mine(
   if(add_safety_assertion)
   {
     goto_programt::targett t =
-      new_code.add(goto_programt::make_assertion(false_exprt()));
+      new_code.add(goto_programt::make_assertion(done_expr));
     t->source_location_nonconst().set_property_class("pointer dereference");
     t->source_location_nonconst().set_comment(
       function_pointer_assertion_comment(functions));
   }
-  new_code.add(goto_programt::make_assumption(false_exprt()));
-
-
-
-  // patch them all together
-  // new_code.destructive_append(new_code_gotos);
-  // new_code.destructive_append(new_code_calls);
-  // new_code.destructive_append(final_skip);
+  new_code.add(goto_programt::make_assumption(done_expr));
 
   // set locations
   for(auto &instruction : new_code.instructions)
