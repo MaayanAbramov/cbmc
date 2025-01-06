@@ -521,16 +521,11 @@ void remove_function_pointer_mine(
 {
   const exprt &function = target->call_function();
   const exprt &pointer = to_dereference_expr(function).pointer();
-  
-  // the final target is a skip
-  // goto_programt final_skip;
- goto_programt new_code;
+
+  goto_programt new_code;
   goto_programt::targett t_final = new_code.add(goto_programt::make_skip());
   // build the calls and gotos
 
-  // goto_programt new_code_calls;
-  // goto_programt new_code_gotos;
- 
   auto previous_if = t_final;
   for(const auto &fun : functions)
   {
@@ -546,9 +541,12 @@ void remove_function_pointer_mine(
 
     auto previous_call = new_code.insert_before(previous_if, goto_programt::make_function_call(new_call));
     new_code.destructive_insert(previous_if, tmp);
+    
+    // Create the assignment `done = 1`
+    symbol_exprt done_expr("done", typet(bool_typet())); 
+    constant_exprt one_expr(irep_idt("1"),signed_int_type());
 
-    // goto final
-    //new_code.add(goto_programt::make_goto(t_final, true_exprt()));
+    new_code.insert_before(previous_if, goto_programt::make_assignment(code_assignt(done_expr, one_expr)));
 
     // goto to call
     const address_of_exprt address_of(fun, pointer_type(fun.type()));
