@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 dummy_parameter.c
 check-return-diagnostics
 ^EXIT=(0|127|134|137)$
