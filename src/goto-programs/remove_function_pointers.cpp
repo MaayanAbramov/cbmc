@@ -527,8 +527,10 @@ void remove_function_pointer_mine(
   
   // build the calls and gotos
   
-  // Create the assignment `done = 1`
-  symbol_exprt done_expr("done", typet(bool_typet())); 
+  // Intialize the assignment instruction `done = false`
+  symbol_exprt done_expr("done", typet(bool_typet()));
+  goto_programt::make_assignment(code_assignt(done_expr, false_exprt()));
+   
   auto previous_if = t_final;
   for(const auto &fun : functions)
   {
@@ -544,11 +546,8 @@ void remove_function_pointer_mine(
 
     auto previous_call = new_code.insert_before(previous_if, goto_programt::make_function_call(new_call));
     new_code.destructive_insert(previous_if, tmp);
-    
-    // Create the assignment tbe one for `done = 1`
-    constant_exprt one_expr(irep_idt("1"),signed_int_type());
-
-    new_code.insert_before(previous_if, goto_programt::make_assignment(code_assignt(done_expr, one_expr)));
+      
+    new_code.insert_before(previous_if, goto_programt::make_assignment(code_assignt(done_expr, true_exprt())));//this line is what's causing the dump core in 'cbmc fp.c --choose-first-candidate --pointer-check'
 
     // goto to call
     const address_of_exprt address_of(fun, pointer_type(fun.type()));
@@ -569,6 +568,7 @@ void remove_function_pointer_mine(
     t->source_location_nonconst().set_comment(
       function_pointer_assertion_comment(functions));
   }
+
   new_code.add(goto_programt::make_assumption(done_expr));
 
   // set locations
