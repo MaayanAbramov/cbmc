@@ -509,9 +509,6 @@ void remove_function_pointer(
     });
 }
 
-
-
-
 void remove_function_pointer_mine(
   message_handlert &message_handler,
   symbol_tablet &symbol_table,
