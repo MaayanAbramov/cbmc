@@ -509,6 +509,9 @@ void remove_function_pointer(
     });
 }
 
+
+
+
 void remove_function_pointer_mine(
   message_handlert &message_handler,
   symbol_tablet &symbol_table,
@@ -523,40 +526,40 @@ void remove_function_pointer_mine(
   const exprt &pointer = to_dereference_expr(function).pointer();
 
   goto_programt new_code;
+
+  symbolt new_symbol;
+  new_symbol.name = "done";
+  new_symbol.base_name = "done";
+  new_symbol.pretty_name = "done";
+  new_symbol.type = bool_typet();
+  new_symbol.is_static_lifetime = false;
+  new_symbol.is_thread_local = true;
+  new_symbol.is_lvalue = true;
+  new_symbol.mode = ID_C;
+
+  const symbol_exprt done_expr("done", bool_typet());
+  new_code.add(goto_programt::make_decl(done_expr));
+  new_code.add(goto_programt::make_assignment(code_assignt(done_expr, false_exprt())));
+
   goto_programt::targett t_final = new_code.add(goto_programt::make_skip());
-  
-  // build the calls and gotos
-  
-  // Intialize the assignment instruction `done = false`
-  symbol_exprt done_expr("done", typet(bool_typet()));
-  goto_programt::make_assignment(code_assignt(done_expr, false_exprt()));
-   
   auto previous_if = t_final;
+
   for(const auto &fun : functions)
   {
     // call function
-    auto new_call =
-      code_function_callt(target->call_lhs(), fun, target->call_arguments());
-
+    auto new_call = code_function_callt(target->call_lhs(), fun, target->call_arguments());
     // the signature of the function might not match precisely
     fix_argument_types(new_call);
-
-     goto_programt tmp;
-     fix_return_type(function_id, new_call, symbol_table, tmp);
-
-    auto previous_call = new_code.insert_before(previous_if, goto_programt::make_function_call(new_call));
-    new_code.destructive_insert(previous_if, tmp);
-      
-    new_code.insert_before(previous_if, goto_programt::make_assignment(code_assignt(done_expr, true_exprt())));//this line is what's causing the dump core in 'cbmc fp.c --choose-first-candidate --pointer-check'
-
+    goto_programt tmp;
+    fix_return_type(function_id, new_call, symbol_table, tmp);
+    auto previous_done = new_code.insert_before(previous_if, goto_programt::make_assignment(code_assignt(done_expr, true_exprt())));
+    auto previous_call = new_code.insert_before(previous_done, goto_programt::make_function_call(new_call));
+    new_code.destructive_insert(previous_done, tmp);
     // goto to call
     const address_of_exprt address_of(fun, pointer_type(fun.type()));
-
-    const auto casted_address =
-      typecast_exprt::conditional_cast(address_of, pointer.type());
-
+    const auto casted_address = typecast_exprt::conditional_cast(address_of, pointer.type());
     previous_if = new_code.insert_before(previous_call,
-      goto_programt::make_goto(previous_if, notequal_exprt(pointer, casted_address)));
+    goto_programt::make_goto(previous_if, notequal_exprt(pointer, casted_address)));
   } 
 
   // fall-through
@@ -570,12 +573,10 @@ void remove_function_pointer_mine(
   }
 
   new_code.add(goto_programt::make_assumption(done_expr));
-
   // set locations
   for(auto &instruction : new_code.instructions)
   {
     source_locationt &source_location = instruction.source_location_nonconst();
-
     irep_idt property_class = source_location.get_property_class();
     irep_idt comment = source_location.get_comment();
     source_location = target->source_location();
@@ -589,14 +590,11 @@ void remove_function_pointer_mine(
   next_target++;
 
   goto_program.destructive_insert(next_target, new_code);
-
   // We preserve the original dereferencing to possibly catch
   // further pointer-related errors.
   code_expressiont code_expression(function);
   code_expression.add_source_location()=function.source_location();
-  *target =
-    goto_programt::make_other(code_expression, target->source_location()); 
-
+  *target = goto_programt::make_other(code_expression, target->source_location()); 
   // report statistics
   messaget log{message_handler};
   log.statistics().source_location = target->source_location();
