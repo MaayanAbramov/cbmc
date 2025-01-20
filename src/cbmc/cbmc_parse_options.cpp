@@ -128,8 +128,8 @@ void cbmc_parse_optionst::get_command_line_options(optionst &options)
 
   cbmc_parse_optionst::set_default_options(options);
   parse_c_object_factory_options(cmdline, options);
-  if(cmdline.isset("choose-first-candidate")){
-    options.set_option("choose-first-candidate", true);
+  if(cmdline.isset("improved_algorithm_fp_removal")){
+    options.set_option("improved_algorithm_fp_removal", true);
   }
   if(cmdline.isset("function"))
     options.set_option("function", cmdline.get_value("function"));

@@ -336,7 +336,7 @@ void remove_function_pointerst::remove_function_pointer(
   }
   if(choose_first_candidate == true)
   {
-  ::remove_function_pointer_mine(
+  ::remove_function_pointer_improved_algorithm(
     message_handler,
     symbol_table,
     goto_program,
@@ -509,7 +509,7 @@ void remove_function_pointer(
     });
 }
 
-void remove_function_pointer_mine(
+void remove_function_pointer_improved_algorithm(
   message_handlert &message_handler,
   symbol_tablet &symbol_table,
   goto_programt &goto_program,
@@ -517,7 +517,7 @@ void remove_function_pointer_mine(
   goto_programt::targett target,
   const std::unordered_set<symbol_exprt, irep_hash> &functions,
   const bool add_safety_assertion,
-  bool choose_first_candidate)
+  bool improved_algorithm_fp_removal)
 {
   const exprt &function = target->call_function();
   const exprt &pointer = to_dereference_expr(function).pointer();
@@ -534,8 +534,12 @@ void remove_function_pointer_mine(
   new_symbol.is_lvalue = true;
   new_symbol.mode = ID_C;
 
+  // symbol_table.add(new_symbol);
+  if(!symbol_table.insert(std::move(new_symbol)).second)
+  {
+    throw "Failed to add 'done' symbol to symbol table";
+  }
   const symbol_exprt done_expr("done", bool_typet());
-  new_code.add(goto_programt::make_decl(done_expr));
   new_code.add(goto_programt::make_assignment(code_assignt(done_expr, false_exprt())));
 
   goto_programt::targett t_final = new_code.add(goto_programt::make_skip());

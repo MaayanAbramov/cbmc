@@ -61,7 +61,7 @@ bool remove_function_pointers(
 /// \param functions: The set of functions to consider
 /// \param add_safety_assertion: Iff true, include an assertion that the
 //         pointer matches one of the candidate functions
-void remove_function_pointer_mine(
+void remove_function_pointer_improved_algorithm(
   message_handlert &message_handler,
   symbol_tablet &symbol_table,
   goto_programt &goto_program,
