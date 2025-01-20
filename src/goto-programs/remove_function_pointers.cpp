@@ -543,7 +543,7 @@ void remove_function_pointer_mine(
   auto previous_if = t_final;
 
   for(const auto &fun : functions)
-  {
+  { 
     // call function
     auto new_call = code_function_callt(target->call_lhs(), fun, target->call_arguments());
     // the signature of the function might not match precisely
