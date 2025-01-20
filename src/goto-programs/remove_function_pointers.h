@@ -30,7 +30,7 @@ void remove_function_pointers(
   goto_modelt &goto_model,
   bool add_safety_assertion,
   bool only_remove_const_fps=false,
-  bool choose_first_candidate = false);
+  bool improved_algorithm_fp_removal = false);
 
 void remove_function_pointers(
   message_handlert &_message_handler,
@@ -38,7 +38,7 @@ void remove_function_pointers(
   goto_functionst &goto_functions,
   bool add_safety_assertion,
   bool only_remove_const_fps=false,
-  bool choose_first_candidate = false);
+  bool improved_algorithm_fp_removal = false);
 
 bool remove_function_pointers(
   message_handlert &_message_handler,
@@ -48,7 +48,7 @@ bool remove_function_pointers(
   const irep_idt &function_id,
   bool add_safety_assertion,
   bool only_remove_const_fps = false,
-  bool choose_first_candidate = false);
+  bool improved_algorithm_fp_removal = false);
 
 /// Replace a call to a dynamic function at location
 /// target in the given goto-program by a case-split
@@ -69,7 +69,7 @@ void remove_function_pointer_improved_algorithm(
   goto_programt::targett target,
   const std::unordered_set<symbol_exprt, irep_hash> &functions,
   const bool add_safety_assertion,
-  bool choose_first_candidate=false);
+  bool improved_algorithm_fp_removal=false);
 
 void remove_function_pointer(
   message_handlert &message_handler,
