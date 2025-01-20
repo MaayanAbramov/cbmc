@@ -534,7 +534,7 @@ void remove_function_pointer_mine(
   new_symbol.is_lvalue = true;
   new_symbol.mode = ID_C;
   
-  symbol_table.insert(std::move(new_symbol)).second;
+  symbol_table.insert(std::move(new_symbol));
   const symbol_exprt done_expr("done", bool_typet());
   new_code.add(goto_programt::make_decl(done_expr));
   new_code.add(goto_programt::make_assignment(code_assignt(done_expr, false_exprt())));
