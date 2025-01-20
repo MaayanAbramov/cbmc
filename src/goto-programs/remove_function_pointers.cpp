@@ -533,12 +533,8 @@ void remove_function_pointer_improved_algorithm(
   new_symbol.is_thread_local = true;
   new_symbol.is_lvalue = true;
   new_symbol.mode = ID_C;
-
-  // symbol_table.add(new_symbol);
-  if(!symbol_table.insert(std::move(new_symbol)).second)
-  {
-    throw "Failed to add 'done' symbol to symbol table";
-  }
+  
+  symbol_table.insert(std::move(new_symbol));
   const symbol_exprt done_expr("done", bool_typet());
   new_code.add(goto_programt::make_assignment(code_assignt(done_expr, false_exprt())));
 
@@ -546,7 +542,7 @@ void remove_function_pointer_improved_algorithm(
   auto previous_if = t_final;
 
   for(const auto &fun : functions)
-  {
+  { 
     // call function
     auto new_call = code_function_callt(target->call_lhs(), fun, target->call_arguments());
     // the signature of the function might not match precisely
