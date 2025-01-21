@@ -38,7 +38,7 @@ public:
     bool _add_safety_assertion,
     bool only_resolve_const_fps,
     const goto_functionst &goto_functions,
-    bool choose_first_candidate);
+    bool improved_algorithm_fp_removal);
 
   void operator()(goto_functionst &goto_functions);
 
@@ -59,7 +59,7 @@ protected:
   // This can be activated in goto-instrument using
   // --remove-const-function-pointers instead of --remove-function-pointers
   bool only_resolve_const_fps;
-  bool choose_first_candidate;
+  bool improved_algorithm_fp_removal;
   /// Replace a call to a dynamic function at location
   /// target in the given goto-program by determining
   /// functions that have a compatible signature
@@ -83,13 +83,13 @@ remove_function_pointerst::remove_function_pointerst(
   bool _add_safety_assertion,
   bool only_resolve_const_fps,
   const goto_functionst &goto_functions,
-  bool choose_first_candidate)
+  bool improved_algorithm_fp_removal)
   : message_handler(_message_handler),
     ns(_symbol_table),
     symbol_table(_symbol_table),
     add_safety_assertion(_add_safety_assertion),
     only_resolve_const_fps(only_resolve_const_fps), 
-    choose_first_candidate(choose_first_candidate)
+    improved_algorithm_fp_removal(improved_algorithm_fp_removal)
 
 {
   for(const auto &s : symbol_table.symbols)
@@ -334,9 +334,9 @@ void remove_function_pointerst::remove_function_pointer(
       functions.insert(expr);
     }
   }
-  if(choose_first_candidate == true)
+  if(improved_algorithm_fp_removal == true)
   {
-  ::remove_function_pointer_mine(
+  ::remove_function_pointer_improved_algorithm(
     message_handler,
     symbol_table,
     goto_program,
@@ -344,7 +344,7 @@ void remove_function_pointerst::remove_function_pointer(
     target,
     functions,
     add_safety_assertion, 
-    choose_first_candidate);
+    improved_algorithm_fp_removal);
   }
   else
   {
@@ -509,7 +509,7 @@ void remove_function_pointer(
     });
 }
 
-void remove_function_pointer_mine(
+void remove_function_pointer_improved_algorithm(
   message_handlert &message_handler,
   symbol_tablet &symbol_table,
   goto_programt &goto_program,
@@ -517,7 +517,7 @@ void remove_function_pointer_mine(
   goto_programt::targett target,
   const std::unordered_set<symbol_exprt, irep_hash> &functions,
   const bool add_safety_assertion,
-  bool choose_first_candidate)
+  bool improved_algorithm_fp_removal)
 {
   const exprt &function = target->call_function();
   const exprt &pointer = to_dereference_expr(function).pointer();
@@ -536,7 +536,6 @@ void remove_function_pointer_mine(
   
   symbol_table.insert(std::move(new_symbol));
   const symbol_exprt done_expr("done", bool_typet());
-  new_code.add(goto_programt::make_decl(done_expr));
   new_code.add(goto_programt::make_assignment(code_assignt(done_expr, false_exprt())));
 
   goto_programt::targett t_final = new_code.add(goto_programt::make_skip());
@@ -667,7 +666,7 @@ bool remove_function_pointers(
   const irep_idt &function_id,
   bool add_safety_assertion,
   bool only_remove_const_fps,
-  bool choose_first_candidate)
+  bool improved_algorithm_fp_removal)
 {
   remove_function_pointerst
     rfp(
@@ -675,7 +674,8 @@ bool remove_function_pointers(
       symbol_table,
       add_safety_assertion,
       only_remove_const_fps,
-      goto_functions,choose_first_candidate);
+      goto_functions,
+      improved_algorithm_fp_removal);
 
   return rfp.remove_function_pointers(goto_program, function_id);
 }
@@ -686,7 +686,7 @@ void remove_function_pointers(
   goto_functionst &goto_functions,
   bool add_safety_assertion,
   bool only_remove_const_fps,
-   bool choose_first_candidate)
+   bool improved_algorithm_fp_removal)
 {
   remove_function_pointerst
     rfp(
@@ -695,7 +695,7 @@ void remove_function_pointers(
       add_safety_assertion,
       only_remove_const_fps,
       goto_functions,
-      choose_first_candidate);
+      improved_algorithm_fp_removal);
 
   rfp(goto_functions);
 }
@@ -704,7 +704,7 @@ void remove_function_pointers(message_handlert &_message_handler,
   goto_modelt &goto_model,
   bool add_safety_assertion,
   bool only_remove_const_fps,
-  bool choose_first_candidate)
+  bool improved_algorithm_fp_removal)
 {
   remove_function_pointers(
     _message_handler,
@@ -712,5 +712,5 @@ void remove_function_pointers(message_handlert &_message_handler,
     goto_model.goto_functions,
     add_safety_assertion,
     only_remove_const_fps,
-    choose_first_candidate);
+    improved_algorithm_fp_removal);
 }
