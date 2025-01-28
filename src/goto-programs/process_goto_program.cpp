@@ -44,8 +44,7 @@ bool process_goto_program(
     log.get_message_handler(),
     goto_model,
     options.get_bool_option("pointer-check"),false, //the fourth argument "false" added here as a parameter only_remove_const_fps = false. reason: I needed to initialize the fifth parameter
-    options.get_bool_option("choose-first-candidate")); //here we put the argument flag
-
+    options.get_bool_option("improved_algorithm_fp_removal")); //here we put the argument flag
   mm_io(goto_model);
 
   // instrument library preconditions
