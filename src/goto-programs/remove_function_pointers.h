@@ -29,14 +29,16 @@ void remove_function_pointers(
   message_handlert &_message_handler,
   goto_modelt &goto_model,
   bool add_safety_assertion,
-  bool only_remove_const_fps=false);
+  bool only_remove_const_fps=false,
+  bool improved_algorithm_fp_removal = false);
 
 void remove_function_pointers(
   message_handlert &_message_handler,
   symbol_tablet &symbol_table,
   goto_functionst &goto_functions,
   bool add_safety_assertion,
-  bool only_remove_const_fps=false);
+  bool only_remove_const_fps=false,
+  bool improved_algorithm_fp_removal = false);
 
 bool remove_function_pointers(
   message_handlert &_message_handler,
@@ -45,7 +47,8 @@ bool remove_function_pointers(
   goto_programt &goto_program,
   const irep_idt &function_id,
   bool add_safety_assertion,
-  bool only_remove_const_fps = false);
+  bool only_remove_const_fps = false,
+  bool improved_algorithm_fp_removal = false);
 
 /// Replace a call to a dynamic function at location
 /// target in the given goto-program by a case-split
@@ -58,6 +61,16 @@ bool remove_function_pointers(
 /// \param functions: The set of functions to consider
 /// \param add_safety_assertion: Iff true, include an assertion that the
 //         pointer matches one of the candidate functions
+void remove_function_pointer_improved_algorithm(
+  message_handlert &message_handler,
+  symbol_tablet &symbol_table,
+  goto_programt &goto_program,
+  const irep_idt &function_id,
+  goto_programt::targett target,
+  const std::unordered_set<symbol_exprt, irep_hash> &functions,
+  const bool add_safety_assertion,
+  bool improved_algorithm_fp_removal=false);
+
 void remove_function_pointer(
   message_handlert &message_handler,
   symbol_tablet &symbol_table,

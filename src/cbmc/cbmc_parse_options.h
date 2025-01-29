@@ -59,6 +59,7 @@ class optionst;
   "(verbosity):(no-library)" \
   "(nondet-static)" \
   "(version)" \
+  "(improved_algorithm_fp_removal)"\
   OPT_COVER \
   "(symex-coverage-report):" \
   "(mm):" \

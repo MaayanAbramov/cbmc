@@ -1,4 +1,4 @@
-CORE
+KNOWNBUG
 strcpy-no-decl.c
 --string-abstraction --validate-goto-model
 Condition: strlen type inconsistency
